@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Profil użytkownika{% endblock %}
+
+{% block content %}
+    <h2>Profil użytkownika</h2>
+    <p>Nazwa użytkownika: {{ user.username }}</p>
+    <p>Imię: {{ user.first_name }}</p>
+    <p>Nazwisko: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+
+    {% for donation in donations %}
+        <div>
+            <ul>
+                <li>Ilość worków: {{ donation.quantity }}</li>
+                <li>Organizacja: {{ institution.name }}, {{ institution.get_type_display }}</li>
+                <li>Kategoria:{% for category in donation.categories %}{{ category }} {% endfor %}</li>
+                <li>Data zabrania: {{ donation.pick_up_date }}, {{ donation.pick_up_time }}</li>
+            </ul>
+        </div>
+    {% empty %}
+        Brak przekazanych darów.
+    {% endfor %}
+{% endblock %}
